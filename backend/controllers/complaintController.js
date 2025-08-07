@@ -11,12 +11,12 @@ const getComplaints = async (req, res) => {
 };
 
 
-// Add Complaint Function:
+// Add Complaint:
 
 const addComplaint = async (req, res) => {
-    const { title, description, deadline } = req.body;
+    const { userName, emailAddress, incidentDate, natureOfComplaint, desiredOutcome, consentToFollowUp } = req.body;
     try {
-        const complaint = await Complaint.create({ userId: req.user.id, title, description, deadline });
+        const complaint = await Complaint.create({ userId: req.user.id, userName, emailAddress, incidentDate, natureOfComplaint, desiredOutcome, consentToFollowUp });
         res.status(201).json(complaint);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -27,14 +27,19 @@ const addComplaint = async (req, res) => {
 // Update Complaint:
 
 const updateComplaint = async (req, res) => {
-    const { title, description, completed, deadline } = req.body;
+    const { userName, emailAddress, incidentDate, natureOfComplaint, desiredOutcome, consentToFollowUp, status } = req.body;
     try {
         const complaint = await Complaint.findById(req.params.id);
         if (!complaint) return res.status(404).json({ message: 'Complaint not found' });
-        complaint.title = title || complaint.title;
-        complaint.description = description || complaint.description;
-        complaint.completed = completed ?? complaint.completed;
-        complaint.deadline = deadline || complaint.deadline;
+        
+        complaint.userName = userName || complaint.userName;
+        complaint.emailAddress = emailAddress || complaint.emailAddress;
+        complaint.incidentDate = incidentDate || complaint.incidentDate;
+        complaint.natureOfComplaint = natureOfComplaint || complaint.natureOfComplaint;
+        complaint.desiredOutcome = desiredOutcome || complaint.desiredOutcome;
+        complaint.consentToFollowUp = consentToFollowUp ?? complaint.consentToFollowUp;
+        complaint.status = status || complaint.status;
+        
         const updatedComplaint = await complaint.save();
         res.json(updatedComplaint);
     } catch (error) {
@@ -46,8 +51,8 @@ const updateComplaint = async (req, res) => {
 
 const deleteComplaint = async (req, res) => {
  try {
-    const complaint = await Complaint.findByld(req.params.id);
-    if(!complaint) return res.status(404).json({message:'Task not found'});
+    const complaint = await Complaint.findById(req.params.id);
+    if(!complaint) return res.status(404).json({message:'Complaint not found'});
 
     await complaint.remove();
     res.json({ message:'Complaint deleted'});
