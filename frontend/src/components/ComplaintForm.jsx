@@ -80,7 +80,7 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         className="w-full mb-4 p-2 border rounded"
       />
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingTask ? 'Update Button' : 'Create Button'}
+        {editingComplaint ? 'Update Button' : 'Create Button'}
       </button>
     </form>
   );

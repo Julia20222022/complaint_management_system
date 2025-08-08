@@ -6,7 +6,7 @@ const ComplaintList = ({ complaints, setComplaint, setEditingComplaint }) => {
 
   const handleDelete = async (complaintId) => {
     try {
-      await axiosInstance.delete(`/api/complaints/${compliantId}`, {
+      await axiosInstance.delete(`/api/complaints/${complaintId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setComplaint(complaints.filter((complaint) => complaint._id !== complaintId));
@@ -17,7 +17,7 @@ const ComplaintList = ({ complaints, setComplaint, setEditingComplaint }) => {
 
   return (
     <div>
-      {compliants.map((complaint) => (
+      {complaints.map((complaint) => (
         <div key={complaint._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
           <h2 className="font-bold">{complaint.title}</h2>
           <p>{complaint.description}</p>
