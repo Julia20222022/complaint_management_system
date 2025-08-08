@@ -50,6 +50,7 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         setComplaints([...complaints, response.data]);
       }
       setEditingComplaint(null);
+
       setFormData({ userName: '', emailAddress: '', incidentDate: '', natureOfComplaint: '', desiredOutcome: '', consentToFollowUp: '', status: '', });
     } catch (error) {
       alert('Failed to save complaint.');
@@ -61,6 +62,7 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
       <h1 className="text-2xl font-bold mb-4">{editingComplaint ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
       <input
         type="text"
+
         placeholder="Your Name"
         value={formData.userName}
         onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
