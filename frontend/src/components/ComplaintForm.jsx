@@ -50,7 +50,8 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         setComplaints([...complaints, response.data]);
       }
       setEditingComplaint(null);
-      setFormData({ title: '', description: '', deadline: '' });
+
+      setFormData({ userName: '', emailAddress: '', incidentDate: '', natureOfComplaint: '', desiredOutcome: '', consentToFollowUp: '', status: '', });
     } catch (error) {
       alert('Failed to save complaint.');
     }
@@ -61,22 +62,45 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
       <h1 className="text-2xl font-bold mb-4">{editingComplaint ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
       <input
         type="text"
-        placeholder="Title"
-        value={formData.title}
-        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+
+        placeholder="Your Name"
+        value={formData.userName}
+        onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
       <input
         type="text"
-        placeholder="Description"
-        value={formData.description}
-        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        placeholder="Email Address"
+        value={formData.emailAddress}
+        onChange={(e) => setFormData({ ...formData, emailAddress: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
       <input
         type="date"
-        value={formData.deadline}
-        onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+        placeholder="Incident Date"
+        value={formData.incidentDate}
+        onChange={(e) => setFormData({ ...formData, incidentDate: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      />
+      <input
+        type="text"
+        placeholder="Nature of Complaint"
+        value={formData.natureOfComplaint}
+        onChange={(e) => setFormData({ ...formData, natureOfComplaint: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      />
+      <input
+        type="text"
+        placeholder="Desired Outcome"
+        value={formData.desiredOutcome}
+        onChange={(e) => setFormData({ ...formData, desiredOutcome: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      />
+      <input
+        type="text"
+        placeholder="Consent to Follow Up"
+        value={formData.consentToFollowUp}
+        onChange={(e) => setFormData({ ...formData, consentToFollowUp: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
