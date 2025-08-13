@@ -12,11 +12,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post('/api/auth/login', formData);
-      login(response.data); //add one if condition if user type admin= navigate here etc
-      navigate('/tasks');
-      //navigate two types of dashboard user and admin
+      const { role, token } = response.data;
+      login(response.data);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      if (role === 'staff') navigate('/staff');
+      else navigate('/general');
     } catch (error) {
-      alert('Login failed. Please try again.');
+      alert(error?.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 
