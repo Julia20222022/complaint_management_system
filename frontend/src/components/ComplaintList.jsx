@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const ComplaintList = ({ complaints, setComplaint, setEditingComplaint }) => {
+const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
   const { user } = useAuth();
 
   const handleDelete = async (complaintId) => {
@@ -9,29 +9,44 @@ const ComplaintList = ({ complaints, setComplaint, setEditingComplaint }) => {
       await axiosInstance.delete(`/api/complaints/${complaintId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      setComplaint(complaints.filter((complaint) => complaint._id !== complaintId));
+      setComplaints(complaints.filter((complaint) => complaint._id !== complaintId));
     } catch (error) {
       alert('Failed to delete complaint.');
     }
   };
 
+  const fmtDate = (d) => (d ? new Date(d).toLocaleDateString() : '-');
+
   return (
     <div>
-      {complaints.map((complaint) => (
+      {complaints.map((complaint, i) => ( // add i for numbering
         <div key={complaint._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-          <h2 className="font-bold">{complaint.title}</h2>
-          <p>{complaint.description}</p>
-          <p className="text-sm text-gray-500">Deadline: {new Date(complaint.deadline).toLocaleDateString()}</p>
-          <div className="mt-2">
+          <div className="flex justify-between items-start">
+            <h2 className="font-bold">Complaint #{i + 1} - {complaint.userName || 'Unnamed'}</h2>
+            <span className="text-sm px-2 py-1 rounded bg-white border">
+              {complaint.status || 'open'}
+            </span>
+          </div>
+
+          <div className="mt-2 text-sm text-gray-700 space-y-1">
+            <div><span className="font-semibold">Email:</span> {complaint.emailAddress || '-'}</div>
+            <div><span className="font-semibold">Submitted:</span> {fmtDate(complaint.created)}</div>
+            <div><span className="font-semibold">Incident date:</span> {fmtDate(complaint.incidentDate)}</div>
+            <div><span className="font-semibold">Complaint:</span> {complaint.natureOfComplaint || '-'}</div>
+            <div><span className="font-semibold">Desired outcome:</span> {complaint.desiredOutcome || '-'}</div>
+            <div><span className="font-semibold">Consent to follow up:</span> {complaint.consentToFollowUp ? 'Yes' : 'No'}</div>
+          </div>
+
+          <div className="mt-3 flex gap-2">
             <button
               onClick={() => setEditingComplaint(complaint)}
-              className="mr-2 bg-yellow-500 text-white px-4 py-2 rounded"
+              className="bg-yellow-500 text-white px-4 py-2 rounded"
             >
               Edit
             </button>
             <button
               onClick={() => handleDelete(complaint._id)}
-              className="bg-red-500 text-white px-4 py-2 rounded"
+              className="bg-red-600 text-white px-4 py-2 rounded"
             >
               Delete
             </button>

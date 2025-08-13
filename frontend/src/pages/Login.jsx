@@ -12,8 +12,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post('/api/auth/login', formData);
-      login(response.data);
+      login(response.data); //add one if condition if user type admin= navigate here etc
       navigate('/tasks');
+      //navigate two types of dashboard user and admin
     } catch (error) {
       alert('Login failed. Please try again.');
     }

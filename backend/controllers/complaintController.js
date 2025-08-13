@@ -19,6 +19,7 @@ const addComplaint = async (req, res) => {
         const complaint = await Complaint.create({ userId: req.user.id, userName, emailAddress, incidentDate, natureOfComplaint, desiredOutcome, consentToFollowUp });
         res.status(201).json(complaint);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -63,3 +64,4 @@ const deleteComplaint = async (req, res) => {
 
 module.exports = {getComplaints, addComplaint, updateComplaint, deleteComplaint };
 
+// functions
