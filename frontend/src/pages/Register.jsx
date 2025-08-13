@@ -3,17 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 const Register = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'general',
+    staffCode: ''
+  });
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('/api/auth/register', formData);
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+        ...(formData.role === 'staff' ? { staffCode: formData.staffCode } : {})
+      };
+
+      await axiosInstance.post('/api/auth/register', payload);
+
       alert('Registration successful. Please log in.');
       navigate('/login');
     } catch (error) {
-      alert('Registration failed. Please try again.');
+      alert(error?.response?.data?.message || 'Registration failed. Please try again.');
     }
   };
 
@@ -21,6 +37,7 @@ const Register = () => {
     <div className="max-w-md mx-auto mt-20">
       <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded">
         <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
+
         <input
           type="text"
           placeholder="Name"
@@ -28,6 +45,7 @@ const Register = () => {
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           className="w-full mb-4 p-2 border rounded"
         />
+
         <input
           type="email"
           placeholder="Email"
@@ -35,19 +53,34 @@ const Register = () => {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           className="w-full mb-4 p-2 border rounded"
         />
+
         <input
           type="password"
           placeholder="Password"
           value={formData.password}
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           className="w-full mb-4 p-2 border rounded"
-        /> 
+        />
 
+        <label className="block mb-2 font-medium">Role</label>
+        <select
+          value={formData.role}
+          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+          className="w-full mb-4 p-2 border rounded"
+        >
+          <option value="general">General</option>
+          <option value="staff">Staff</option>
+        </select>
 
-
-
-
-
+        {formData.role === 'staff' && (
+          <input
+            type="text"
+            placeholder="Staff Code"
+            value={formData.staffCode}
+            onChange={(e) => setFormData({ ...formData, staffCode: e.target.value })}
+            className="w-full mb-4 p-2 border rounded"
+          />
+        )}
 
         <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
           Register
@@ -56,6 +89,5 @@ const Register = () => {
     </div>
   );
 };
-// add another block eg for user type withh type, placeholder etc
 
 export default Register;

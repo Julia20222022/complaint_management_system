@@ -1,18 +1,21 @@
-
 const express = require('express');
-const { getComplaints, addComplaint, updateComplaint, deleteComplaint } = require('../controllers/complaintController');
-const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.get('/', protect, getComplaints);
+const {
+  getComplaints,
+  addComplaint,
+  updateComplaint,
+  deleteComplaint,
+  getMyComplaints
+} = require('../controllers/complaintController');
+
+const { protect } = require('../middleware/authMiddleware');
+const requireRole = require('../middleware/requireRole');
+
+router.get('/my', protect, getMyComplaints);
+router.get('/', protect, requireRole('staff'), getComplaints);
 router.post('/', protect, addComplaint);
-router.put('/:id', protect, updateComplaint);
-router.delete('/:id', protect, deleteComplaint);
+router.put('/:id', protect, requireRole('staff'), updateComplaint);
+router.delete('/:id', protect, requireRole('staff'), deleteComplaint);
 
 module.exports = router;
-
-// change file path and change names of functions have different http methods
-
-// getComplaints, addComplaint, updateComplaint, deleteComplaint
-
-// find path for router.get in green- look at 

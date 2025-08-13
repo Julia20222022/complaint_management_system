@@ -1,14 +1,25 @@
 // Get Complaint Function (Read):
-
+//Staff
 const Complaint = require('../models/Complaint');
+
 const getComplaints = async (req, res) => {
     try {
-        const complaints = await Complaint.find({ userId: req.user.id });
-        res.json(complaints);
+      const complaints = await Complaint.find().sort({ createdAt: -1 });
+      res.json(complaints);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
-};
+  };
+
+//User
+const getMyComplaints = async (req, res) => {
+    try {
+      const complaints = await Complaint.find({ userId: req.user.id }).sort({ createdAt: -1 });
+      res.json(complaints);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 
 
 // Add Complaint:
@@ -62,6 +73,6 @@ const deleteComplaint = async (req, res) => {
     }
 }; 
 
-module.exports = {getComplaints, addComplaint, updateComplaint, deleteComplaint };
+module.exports = {getComplaints, getMyComplaints, addComplaint, updateComplaint, deleteComplaint };
 
 // functions
