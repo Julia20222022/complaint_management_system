@@ -43,6 +43,10 @@ const updateComplaint = async (req, res) => {
     try {
         const complaint = await Complaint.findById(req.params.id);
         if (!complaint) return res.status(404).json({ message: 'Complaint not found' });
+
+        if (req.user.role !== 'staff' && complaint.userId.toString() !== req.user.id) {
+          return res.status(403).json({ message: 'Not allowed to edit this complaint' });
+        }
         
         complaint.userName = userName || complaint.userName;
         complaint.emailAddress = emailAddress || complaint.emailAddress;

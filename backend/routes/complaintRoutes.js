@@ -14,9 +14,8 @@ const requireRole = require('../middleware/requireRole');
 
 router.get('/my', protect, getMyComplaints);
 router.get('/', protect, requireRole('staff'), getComplaints);
-router.get('/all', protect, requireRole('staff'), getComplaints);
 router.post('/', protect, addComplaint);
-router.put('/:id', protect, requireRole('staff'), updateComplaint);
-router.delete('/:id', protect, requireRole('staff'), deleteComplaint);
+router.put('/:id', protect, updateComplaint);
+router.delete('/:id', deleteComplaint);
 
 module.exports = router;
