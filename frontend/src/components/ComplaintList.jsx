@@ -16,6 +16,20 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint, showUpd
     }
   };
 
+  const handleStatus = async (complaint, nextStatus) => {
+    try {
+      const { data } = await axiosInstance.put(
+        `/api/complaints/${complaint._id}`,
+        { status: nextStatus },
+        { headers: { Authorization: `Bearer ${user.token}` } }
+      );
+      setComplaints(complaints.map((c) => (c._id === data._id ? data : c)));
+      alert(`Status updated to ${nextStatus}.`);
+    } catch (error) {
+      alert(error?.response?.data?.message || 'Failed to update status.');
+    }
+  };
+
   const fmtDate = (d) => (d ? new Date(d).toLocaleDateString() : '-');
 
   return (
@@ -24,9 +38,24 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint, showUpd
         <div key={complaint._id} className="bg-[#FAF3E0] p-6 mb-6 rounded shadow-md">
           <div className="flex justify-between items-start">
             <h2 className="font-bold">Complaint #{i + 1} - {complaint.userName || 'Unnamed'}</h2>
+
+          <div className="flex items-center gap-2">
             <span className="text-sm px-2 py-1 rounded bg-white border">
               {complaint.status || 'open'}
             </span>
+
+              {user?.role === 'staff' && (
+                <select
+                  value={complaint.status || 'open'}
+                  onChange={(e) => handleStatus(complaint, e.target.value)}
+                  className="text-sm border rounded p-1 bg-white"
+                >
+                  <option value="open">Open</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="closed">Closed</option>
+                </select>
+              )}
+            </div>
           </div>
 
           <div className="mt-2 text-sm text-gray-700 space-y-1">
@@ -47,7 +76,6 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint, showUpd
                 Update
               </button>
             )}
-
             <button
               onClick={() => handleDelete(complaint._id)}
               className="bg-red-400 text-white font-semibold px-4 py-2 rounded"
