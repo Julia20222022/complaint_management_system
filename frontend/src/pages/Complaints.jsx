@@ -8,6 +8,7 @@ const Complaints = () => {
   const { user } = useAuth();
   const [complaints, setComplaints] = useState([]);
   const [editingComplaint, setEditingComplaint] = useState(null);
+  const [statusFilter, setStatusFilter] = useState('');
 
   useEffect(() => {
     const fetchComplaints = async () => {
@@ -24,16 +25,35 @@ const Complaints = () => {
     fetchComplaints();
   }, [user]);
 
+  const filteredComplaints = statusFilter
+    ? complaints.filter((c) => (c.status || 'open') === statusFilter)
+    : complaints;
+
   return (
     <div className="container mx-auto p-6">
         <h1 className="text-2xl font-bold mb-4 text-[#6B8F71]">My Complaints</h1>
+
+        <div className="mb-4 flex items-center gap-3">
+          <label className="text-[#6B8F71] font-medium">Filter by status:</label>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="border rounded p-2"
+          >
+            <option value="">All</option>
+            <option value="open">Submitted</option>
+            <option value="in-progress">In progress</option>
+            <option value="closed">Resolved</option>
+          </select>
+        </div>
+
       <ComplaintForm
         complaints={complaints}
         setComplaints={setComplaints}
         editingComplaint={editingComplaint}
         setEditingComplaint={setEditingComplaint}
       />
-      <ComplaintList complaints={complaints} setComplaints={setComplaints} setEditingComplaint={setEditingComplaint} />
+      <ComplaintList complaints={filteredComplaints} setComplaints={setComplaints} setEditingComplaint={setEditingComplaint} />
     </div>
   );
 };
