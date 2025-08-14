@@ -10,8 +10,10 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setComplaints(complaints.filter((complaint) => complaint._id !== complaintId));
+      alert('Complaint deleted.');
     } catch (error) {
       alert('Failed to delete complaint.');
+      
     }
   };
 
