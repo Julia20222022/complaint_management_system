@@ -62,6 +62,9 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         setComplaints([...complaints, response.data]);
       }
 
+      alert(editingComplaint ? 'Complaint updated successfully.' : 'Complaint submitted.');
+
+
       setEditingComplaint(null);
       setFormData(emptyForm);
     } catch (error) {
