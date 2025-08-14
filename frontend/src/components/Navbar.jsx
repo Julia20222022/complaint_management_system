@@ -10,12 +10,20 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  const homeHref = user?.role === 'staff' ? '/staff' : '/general';
+
   return (
     <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">Complaint Submission Form</Link>
+      <Link to={homeHref} className="text-2xl font-bold">Complaint Submission Form</Link>
       <div>
         {user ? (
           <>
+            {user.role === 'staff' && (
+              <>
+                <Link to="/staff" className="mr-4">Dashboard</Link>
+                <Link to="/staff/complaints" className="mr-4">Complaints</Link>
+              </>
+            )}
             <Link to="/complaints" className="mr-4">CRUD</Link>
             <Link to="/profile" className="mr-4">Profile</Link>
             <button
