@@ -31,7 +31,7 @@ export default function StaffComplaints() {
     <div className="min-h-screen bg-[#FAF3E0] text-[#6B8F71]">
       <div className="container mx-auto p-6 space-y-6">
         <div className="rounded border border-[#A3B18A]/40 bg-white/70 p-5">
-          <p className="text-2xl font-bold">{firstName} Assigned Complaints</p>
+          <p className="text-2xl font-bold">{firstName} Assigned Complaints </p>
         </div>
 
         <div className="mb-4 flex items-center gap-3">
