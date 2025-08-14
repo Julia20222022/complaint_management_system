@@ -19,8 +19,8 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
 
   return (
     <div>
-      {complaints.map((complaint, i) => ( // add i for numbering
-        <div key={complaint._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
+      {complaints.map((complaint, i) => (
+        <div key={complaint._id} className="bg-[#FAF3E0] p-6 mb-6 rounded shadow-md">
           <div className="flex justify-between items-start">
             <h2 className="font-bold">Complaint #{i + 1} - {complaint.userName || 'Unnamed'}</h2>
             <span className="text-sm px-2 py-1 rounded bg-white border">
@@ -40,9 +40,9 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
           <div className="mt-3 flex gap-2">
             <button
               onClick={() => setEditingComplaint(complaint)}
-              className="bg-yellow-500 text-white px-4 py-2 rounded"
+              className="bg-amber-300 text-white font-semibold px-4 py-2 rounded"
             >
-              Edit
+              Update
             </button>
             <button
               onClick={() => handleDelete(complaint._id)}
