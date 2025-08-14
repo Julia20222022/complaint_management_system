@@ -14,7 +14,8 @@ const protect = async (req, res, next) => {
                 return res.status(401).json({ message: 'User not found' });
             }
             req.user = user;
-            req.user.role = user.role || decoded.role;
+            req.user.id = user._id.toString();
+            req.user.role = (user.role || decoded.role || 'user').toString().trim().toLowerCase();
             next();
         } catch (error) {
             res.status(401).json({ message: 'Not authorized, token failed' });

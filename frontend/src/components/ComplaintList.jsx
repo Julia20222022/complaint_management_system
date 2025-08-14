@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
+const ComplaintList = ({ complaints, setComplaints, setEditingComplaint, showUpdate = true }) => {
   const { user } = useAuth();
 
   const handleDelete = async (complaintId) => {
@@ -13,7 +13,6 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
       alert('Complaint deleted.');
     } catch (error) {
       alert('Failed to delete complaint.');
-      
     }
   };
 
@@ -40,12 +39,14 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
           </div>
 
           <div className="mt-3 flex gap-2">
-            <button
-              onClick={() => setEditingComplaint(complaint)}
-              className="bg-amber-300 text-white font-semibold px-4 py-2 rounded"
-            >
-              Update
-            </button>
+            {showUpdate && setEditingComplaint && (
+              <button
+                onClick={() => setEditingComplaint(complaint)}
+                className="bg-amber-300 text-white font-semibold px-4 py-2 rounded"
+              >
+                Update
+              </button>
+            )}
 
             <button
               onClick={() => handleDelete(complaint._id)}
