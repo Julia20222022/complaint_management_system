@@ -12,7 +12,7 @@ const Complaints = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const response = await axiosInstance.get('/api/complaints', {
+        const response = await axiosInstance.get('/api/complaints/my', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setComplaints(response.data);

@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Complaints from './pages/Complaints';
 import StaffDashboard from './pages/StaffDashboard';
 import GeneralDashboard from './pages/GeneralDashboard';
+import StaffComplaints from './pages/StaffComplaints';
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/complaints" element={<Complaints />} />
-        <Route path="/staff" element={<StaffDashboard />} />
         <Route path="/general" element={<GeneralDashboard />} />
+        <Route path="/staff" element={<StaffDashboard />} />
+        <Route path="/staff/complaints" element={<StaffComplaints />} />
       </Routes>
     </Router>
   );
