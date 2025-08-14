@@ -9,8 +9,9 @@ const complaintSchema = new mongoose.Schema({
     natureOfComplaint: { type: String, required: true },
     desiredOutcome: { type: String, required: false },
     consentToFollowUp: { type: Boolean, default: false },
-    created: { type: Date, default: Date.now },
-    status: { type: String, default: 'open'},
-});
+    status: { type: String, enum: ['open', 'in-progress', 'closed'], default: 'open'},
+},
+    { timestamps: true }
+);
 
 module.exports = mongoose.model('Complaint', complaintSchema);

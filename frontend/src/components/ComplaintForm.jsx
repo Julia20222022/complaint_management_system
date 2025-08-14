@@ -108,7 +108,6 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         value={formData.incidentDate}
         onChange={(e) => setFormData({ ...formData, incidentDate: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-        required
       />
 
       <label htmlFor="natureOfComplaint" className="block mb-1 text-[#6B8F71] font-medium">
@@ -137,7 +136,6 @@ const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditing
         value={formData.desiredOutcome}
         onChange={(e) => setFormData({ ...formData, desiredOutcome: e.target.value })}
         className="w-full mb-1 p-2 border rounded"
-        required
       />
       <div className="text-right text-sm text-gray-500 mb-4">
         {formData.desiredOutcome.length}/{MAX_CHARS}
