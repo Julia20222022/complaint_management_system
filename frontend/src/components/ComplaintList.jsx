@@ -10,8 +10,10 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setComplaints(complaints.filter((complaint) => complaint._id !== complaintId));
+      alert('Complaint deleted.');
     } catch (error) {
       alert('Failed to delete complaint.');
+      
     }
   };
 
@@ -44,9 +46,10 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
             >
               Update
             </button>
+
             <button
               onClick={() => handleDelete(complaint._id)}
-              className="bg-red-600 text-white px-4 py-2 rounded"
+              className="bg-red-400 text-white font-semibold px-4 py-2 rounded"
             >
               Delete
             </button>
