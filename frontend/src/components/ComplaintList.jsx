@@ -44,9 +44,10 @@ const ComplaintList = ({ complaints, setComplaints, setEditingComplaint }) => {
             >
               Update
             </button>
+
             <button
               onClick={() => handleDelete(complaint._id)}
-              className="bg-red-600 text-white px-4 py-2 rounded"
+              className="bg-red-400 text-white font-semibold px-4 py-2 rounded"
             >
               Delete
             </button>
