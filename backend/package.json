@@ -1,7 +1,7 @@
 {
-  "name": "task-manager-backend",
+  "name": "complaint-management-backend",
   "version": "1.0.0",
-  "description": "Backend for Task Manager App",
+  "description": "Backend for Complaint Management System",
   "main": "server.js",
   "scripts": {
     "test": "mocha",
@@ -24,8 +24,8 @@
     "esm": "^3.2.25",
     "mocha": "^11.0.1",
     "nodemon": "^2.0.15",
-    "sinon": "^19.0.2"
+    "sinon": "^19.0.5"
   },
-  "author": "Task Manager Team",
+  "author": "Complaint Management Team",
   "license": "ISC"
 }
