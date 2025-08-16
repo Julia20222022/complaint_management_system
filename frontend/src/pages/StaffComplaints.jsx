@@ -28,10 +28,10 @@ export default function StaffComplaints() {
     : complaints;
 
   return (
-    <div className="min-h-screen bg-[#FAF3E0] text-[#6B8F71]">
-      <div className="container mx-auto p-6 space-y-6">
-        <div className="rounded border border-[#A3B18A]/40 bg-white/70 p-5">
-          <p className="text-2xl font-bold">{firstName} Assigned Complaints </p>
+    <div className="container mx-auto p-6 bg-white text-[#6B8F71]">
+      <div className="space-y-6">
+        <div className="rounded border border-[#A3B18A]/40 bg-[#FAF3E0] p-5">
+          <p className="text-2xl font-bold text-[#6B8F71]">{firstName} Assigned Complaints</p>
         </div>
 
         <div className="mb-4 flex items-center gap-3">
@@ -42,9 +42,9 @@ export default function StaffComplaints() {
             className="border rounded p-2"
           >
             <option value="">All</option>
-            <option value="open">Submitted</option>
+            <option value="open">Open</option>
             <option value="in-progress">In progress</option>
-            <option value="closed">Resolved</option>
+            <option value="closed">Closed</option>
           </select>
         </div>
 
