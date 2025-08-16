@@ -1,4 +1,16 @@
+Roles:
+- General: for general users- no code needed. 
+- Staff: for staff members- code needed to access 
 
+Env:
+STAFF_CODE=STAFF987
+
+Public_URL: http://13.55.119.218
+
+Project Setup Details: 
+Project Specific Username & Password
+
+<!-- 
 **Assessment 1 (Total Marks **20**)**
 
 Assignment: **Software requirements analysis and design (**Full-Stack CRUD Application Development with DevOps Practices**)**
@@ -91,4 +103,4 @@ We will send you an email to choose a Real-World project. If you face any diffic
 * Clarity and completeness of Jira board and SysML models.
 * Adherence to Git best practices and practical contributions.
 * Successful implementation, deploymentand CI/CD pipeline.
-* Problem-solving skills and the ability to go beyond basic requirements.
+* Problem-solving skills and the ability to go beyond basic requirements. -->
