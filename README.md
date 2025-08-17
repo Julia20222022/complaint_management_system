@@ -5,10 +5,12 @@ Roles:
 Env:
 STAFF_CODE=STAFF987
 
-Public_URL: http://13.55.119.218
+Public_URL: http://http://3.27.121.25
 
 Project Setup Details: 
 Project Specific Username & Password
+
+JIRA BOARD: https://connect-team-j7yvbqoo.atlassian.net/jira/software/projects/CMS/boards/34
 
 <!-- 
 **Assessment 1 (Total Marks **20**)**

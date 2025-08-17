@@ -6,8 +6,8 @@
 // const connectDB = require('../config/db');
 // const mongoose = require('mongoose');
 // const sinon = require('sinon');
-// const Task = require('../models/Task');
-// const { updateTask,getTasks,addTask,deleteTask } = require('../controllers/taskController');
+// const Complaint = require('../models/Complaint');
+// const { updateComplaint,getComplaints,addComplaint,deleteComplaint, getMyComplaints } = require('../controllers/complaintController');
 // const { expect } = chai;
 
 // chai.use(chaiHttp);
@@ -15,20 +15,20 @@
 // let port;
 
 
-// describe('AddTask Function Test', () => {
+// describe('AddComplaint Function Test', () => {
 
-//   it('should create a new task successfully', async () => {
+//   it('should create a new complaint successfully', async () => {
 //     // Mock request data
 //     const req = {
 //       user: { id: new mongoose.Types.ObjectId() },
-//       body: { title: "New Task", description: "Task description", deadline: "2025-12-31" }
+//       body: { title: "New Complaint", description: "Complaint description", deadline: "2025-12-31" }
 //     };
 
-//     // Mock task that would be created
-//     const createdTask = { _id: new mongoose.Types.ObjectId(), ...req.body, userId: req.user.id };
+//     // Mock complaint that would be created
+//     const createdComplaint = { _id: new mongoose.Types.ObjectId(), ...req.body, userId: req.user.id };
 
-//     // Stub Task.create to return the createdTask
-//     const createStub = sinon.stub(Task, 'create').resolves(createdTask);
+//     // Stub Complaint.create to return the createdComplaint
+//     const createStub = sinon.stub(Complaint, 'create').resolves(createdComplaint);
 
 //     // Mock response object
 //     const res = {
@@ -37,25 +37,25 @@
 //     };
 
 //     // Call function
-//     await addTask(req, res);
+//     await addComplaint(req, res);
 
 //     // Assertions
 //     expect(createStub.calledOnceWith({ userId: req.user.id, ...req.body })).to.be.true;
 //     expect(res.status.calledWith(201)).to.be.true;
-//     expect(res.json.calledWith(createdTask)).to.be.true;
+//     expect(res.json.calledWith(createdComplaint)).to.be.true;
 
 //     // Restore stubbed methods
 //     createStub.restore();
 //   });
 
 //   it('should return 500 if an error occurs', async () => {
-//     // Stub Task.create to throw an error
-//     const createStub = sinon.stub(Task, 'create').throws(new Error('DB Error'));
+//     // Stub Complaint.create to throw an error
+//     const createStub = sinon.stub(Complaint, 'create').throws(new Error('DB Error'));
 
 //     // Mock request data
 //     const req = {
 //       user: { id: new mongoose.Types.ObjectId() },
-//       body: { title: "New Task", description: "Task description", deadline: "2025-12-31" }
+//       body: { title: "New Complaint", description: "Complaint description", deadline: "2025-12-31" }
 //     };
 
 //     // Mock response object
@@ -65,7 +65,7 @@
 //     };
 
 //     // Call function
-//     await addTask(req, res);
+//     await addComplaint(req, res);
 
 //     // Assertions
 //     expect(res.status.calledWith(500)).to.be.true;
@@ -80,24 +80,24 @@
 
 // describe('Update Function Test', () => {
 
-//   it('should update task successfully', async () => {
-//     // Mock task data
-//     const taskId = new mongoose.Types.ObjectId();
-//     const existingTask = {
-//       _id: taskId,
-//       title: "Old Task",
+//   it('should update complaint successfully', async () => {
+//     // Mock complaint data
+//     const complaintId = new mongoose.Types.ObjectId();
+//     const existingComplaint = {
+//       _id: complaintId,
+//       title: "Old Complaint",
 //       description: "Old Description",
 //       completed: false,
 //       deadline: new Date(),
 //       save: sinon.stub().resolvesThis(), // Mock save method
 //     };
-//     // Stub Task.findById to return mock task
-//     const findByIdStub = sinon.stub(Task, 'findById').resolves(existingTask);
+//     // Stub Complaint.findById to return mock complaint
+//     const findByIdStub = sinon.stub(Complaint, 'findById').resolves(existingComplaint);
 
 //     // Mock request & response
 //     const req = {
-//       params: { id: taskId },
-//       body: { title: "New Task", completed: true }
+//       params: { id: complaintId },
+//       body: { title: "New Complaint", completed: true }
 //     };
 //     const res = {
 //       json: sinon.spy(), 
@@ -105,11 +105,11 @@
 //     };
 
 //     // Call function
-//     await updateTask(req, res);
+//     await updateComplaint(req, res);
 
 //     // Assertions
-//     expect(existingTask.title).to.equal("New Task");
-//     expect(existingTask.completed).to.equal(true);
+//     expect(existingComplaint.title).to.equal("New Complaint");
+//     expect(existingComplaint.completed).to.equal(true);
 //     expect(res.status.called).to.be.false; // No error status should be set
 //     expect(res.json.calledOnce).to.be.true;
 
@@ -119,8 +119,8 @@
 
 
 
-//   it('should return 404 if task is not found', async () => {
-//     const findByIdStub = sinon.stub(Task, 'findById').resolves(null);
+//   it('should return 404 if complaint is not found', async () => {
+//     const findByIdStub = sinon.stub(Complaint, 'findById').resolves(null);
 
 //     const req = { params: { id: new mongoose.Types.ObjectId() }, body: {} };
 //     const res = {
@@ -128,16 +128,16 @@
 //       json: sinon.spy()
 //     };
 
-//     await updateTask(req, res);
+//     await updateComplaint(req, res);
 
 //     expect(res.status.calledWith(404)).to.be.true;
-//     expect(res.json.calledWith({ message: 'Task not found' })).to.be.true;
+//     expect(res.json.calledWith({ message: 'Complaint not found' })).to.be.true;
 
 //     findByIdStub.restore();
 //   });
 
 //   it('should return 500 on error', async () => {
-//     const findByIdStub = sinon.stub(Task, 'findById').throws(new Error('DB Error'));
+//     const findByIdStub = sinon.stub(Complaint, 'findById').throws(new Error('DB Error'));
 
 //     const req = { params: { id: new mongoose.Types.ObjectId() }, body: {} };
 //     const res = {
@@ -145,7 +145,7 @@
 //       json: sinon.spy()
 //     };
 
-//     await updateTask(req, res);
+//     await updateComplaint(req, res);
 
 //     expect(res.status.calledWith(500)).to.be.true;
 //     expect(res.json.called).to.be.true;
@@ -159,20 +159,20 @@
 
 
 
-// describe('GetTask Function Test', () => {
+// describe('GetComplaint Function Test', () => {
 
-//   it('should return tasks for the given user', async () => {
+//   it('should return complaints for the given user', async () => {
 //     // Mock user ID
 //     const userId = new mongoose.Types.ObjectId();
 
-//     // Mock task data
-//     const tasks = [
-//       { _id: new mongoose.Types.ObjectId(), title: "Task 1", userId },
-//       { _id: new mongoose.Types.ObjectId(), title: "Task 2", userId }
+//     // Mock complaint data
+//     const complaints = [
+//       { _id: new mongoose.Types.ObjectId(), title: "Complaint 1", userId },
+//       { _id: new mongoose.Types.ObjectId(), title: "Complaint 2", userId }
 //     ];
 
-//     // Stub Task.find to return mock tasks
-//     const findStub = sinon.stub(Task, 'find').resolves(tasks);
+//     // Stub Complaint.find to return mock complaints
+//     const findStub = sinon.stub(Complaint, 'find').resolves(complaints);
 
 //     // Mock request & response
 //     const req = { user: { id: userId } };
@@ -182,11 +182,11 @@
 //     };
 
 //     // Call function
-//     await getTasks(req, res);
+//     await getComplaints(req, res);
 
 //     // Assertions
 //     expect(findStub.calledOnceWith({ userId })).to.be.true;
-//     expect(res.json.calledWith(tasks)).to.be.true;
+//     expect(res.json.calledWith(complaints)).to.be.true;
 //     expect(res.status.called).to.be.false; // No error status should be set
 
 //     // Restore stubbed methods
@@ -194,8 +194,8 @@
 //   });
 
 //   it('should return 500 on error', async () => {
-//     // Stub Task.find to throw an error
-//     const findStub = sinon.stub(Task, 'find').throws(new Error('DB Error'));
+//     // Stub Complaint.find to throw an error
+//     const findStub = sinon.stub(Complaint, 'find').throws(new Error('DB Error'));
 
 //     // Mock request & response
 //     const req = { user: { id: new mongoose.Types.ObjectId() } };
@@ -205,7 +205,7 @@
 //     };
 
 //     // Call function
-//     await getTasks(req, res);
+//     await getComplaints(req, res);
 
 //     // Assertions
 //     expect(res.status.calledWith(500)).to.be.true;
@@ -219,17 +219,17 @@
 
 
 
-// describe('DeleteTask Function Test', () => {
+// describe('DeleteComplaint Function Test', () => {
 
-//   it('should delete a task successfully', async () => {
+//   it('should delete a complaint successfully', async () => {
 //     // Mock request data
 //     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
 
-//     // Mock task found in the database
-//     const task = { remove: sinon.stub().resolves() };
+//     // Mock complaint found in the database
+//     const complaint = { remove: sinon.stub().resolves() };
 
-//     // Stub Task.findById to return the mock task
-//     const findByIdStub = sinon.stub(Task, 'findById').resolves(task);
+//     // Stub Complaint.findById to return the mock complaint
+//     const findByIdStub = sinon.stub(Complaint, 'findById').resolves(complaint);
 
 //     // Mock response object
 //     const res = {
@@ -238,20 +238,20 @@
 //     };
 
 //     // Call function
-//     await deleteTask(req, res);
+//     await deleteComplaint(req, res);
 
 //     // Assertions
 //     expect(findByIdStub.calledOnceWith(req.params.id)).to.be.true;
-//     expect(task.remove.calledOnce).to.be.true;
-//     expect(res.json.calledWith({ message: 'Task deleted' })).to.be.true;
+//     expect(complaint.remove.calledOnce).to.be.true;
+//     expect(res.json.calledWith({ message: 'Complaint deleted' })).to.be.true;
 
 //     // Restore stubbed methods
 //     findByIdStub.restore();
 //   });
 
-//   it('should return 404 if task is not found', async () => {
-//     // Stub Task.findById to return null
-//     const findByIdStub = sinon.stub(Task, 'findById').resolves(null);
+//   it('should return 404 if complaint is not found', async () => {
+//     // Stub Complaint.findById to return null
+//     const findByIdStub = sinon.stub(Complaint, 'findById').resolves(null);
 
 //     // Mock request data
 //     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
@@ -263,20 +263,20 @@
 //     };
 
 //     // Call function
-//     await deleteTask(req, res);
+//     await deleteComplaint(req, res);
 
 //     // Assertions
 //     expect(findByIdStub.calledOnceWith(req.params.id)).to.be.true;
 //     expect(res.status.calledWith(404)).to.be.true;
-//     expect(res.json.calledWith({ message: 'Task not found' })).to.be.true;
+//     expect(res.json.calledWith({ message: 'Complaint not found' })).to.be.true;
 
 //     // Restore stubbed methods
 //     findByIdStub.restore();
 //   });
 
 //   it('should return 500 if an error occurs', async () => {
-//     // Stub Task.findById to throw an error
-//     const findByIdStub = sinon.stub(Task, 'findById').throws(new Error('DB Error'));
+//     // Stub Complaint.findById to throw an error
+//     const findByIdStub = sinon.stub(Complaint, 'findById').throws(new Error('DB Error'));
 
 //     // Mock request data
 //     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
@@ -288,7 +288,7 @@
 //     };
 
 //     // Call function
-//     await deleteTask(req, res);
+//     await deleteComplaint(req, res);
 
 //     // Assertions
 //     expect(res.status.calledWith(500)).to.be.true;
