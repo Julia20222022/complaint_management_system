@@ -1,16 +1,40 @@
-Roles:
-- General: for general users- no code needed. 
-- Staff: for staff members- code needed to access 
+#Project Design:
+A full-stack CRUD application development with DevOps Practices for a Complaint Management System
 
-Env:
-STAFF_CODE=STAFF987
-
+#URL
 Public_URL: http://http://3.27.121.25
 
-Project Setup Details: 
-Project Specific Username & Password
-
+#Project Management
 JIRA BOARD: https://connect-team-j7yvbqoo.atlassian.net/jira/software/projects/CMS/boards/34
+
+Github link: https://github.com/Julia20222022/complaint_management_system
+
+
+#Project Setup Details: 
+
+#Roles:
+- General: for general users- no code needed. 
+- Staff: for staff members- code needed to access 
+  - STAFF_CODE=STAFF987
+
+#Project Specific Username & Password
+- General:  email: Test@gmail.com
+            password: Test
+- Staff:    email: Staff@gmail.com
+            password: Test
+
+#Features
+- User Authentication (Register & Login)
+- Complaint Submission (CRUD application)
+- Complaint Resolution Process (Staff) (RUD application)
+- Filter, personalised staff list, status update, success/error messaging, staff dashboard, authorised roles
+
+
+
+
+
+
+
 
 <!-- 
 **Assessment 1 (Total Marks **20**)**

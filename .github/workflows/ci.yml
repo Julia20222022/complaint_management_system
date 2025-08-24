@@ -34,10 +34,12 @@ jobs:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
         PORT: ${{ secrets.PORT }}
+        STAFF_CODE: ${{ secrets.STAFF_CODE }}
       run: | 
         echo "Secret 1 is: $MONGO_URI"
         echo "Secret 2 is: $JWT_SECRET"
         echo "Secret 3 is: $PORT"
+        echo "Secret 4 is: $STAFF_CODE"
       
     - run: pm2 stop all
 
