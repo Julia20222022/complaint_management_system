@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
+const emptyForm = {
+  userName: '',
+  emailAddress: '',
+  incidentDate: '',
+  natureOfComplaint: '',
+  desiredOutcome: '',
+  consentToFollowUp: false,
+  status: 'open',
+};
+
 const ComplaintForm = ({ complaints, setComplaints, editingComplaint, setEditingComplaint }) => {
   const { user } = useAuth();
   const MAX_CHARS = 500;
-
-  const emptyForm = {
-    userName: '',
-    emailAddress: '',
-    incidentDate: '',
-    natureOfComplaint: '',
-    desiredOutcome: '',
-    consentToFollowUp: false,
-    status: 'open',
-  };
 
   const [formData, setFormData] = useState(emptyForm);
 
